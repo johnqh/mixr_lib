@@ -1,0 +1,66 @@
+{
+  "name": "@sudobility/mixr_lib",
+  "version": "0.0.1",
+  "description": "Shared utilities library for MIXR cocktail application with type-safe patterns and comprehensive integration",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "build": "bunx tsc -p tsconfig.build.json",
+    "build:watch": "bunx tsc --watch",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "bun run clean && bun run build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "bunx eslint src --ext .ts,.tsx",
+    "lint:fix": "bunx eslint src --ext .ts,.tsx --fix",
+    "format": "bunx prettier --write src/**/*.ts",
+    "format:check": "bunx prettier --check src/**/*.ts",
+    "typecheck": "bunx tsc --noEmit"
+  },
+  "keywords": [
+    "mixr",
+    "cocktail",
+    "business-logic",
+    "zustand",
+    "react",
+    "typescript"
+  ],
+  "author": "John Huang",
+  "license": "MIT",
+  "dependencies": {
+    "zustand": "^5.0.2"
+  },
+  "peerDependencies": {
+    "@sudobility/di": "^1.4.12",
+    "@sudobility/types": "^1.9.4",
+    "@tanstack/react-query": ">=5.0.0",
+    "react": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@sudobility/di": "^1.4.14",
+    "@sudobility/mixr_client": "file:../mixr_client",
+    "@sudobility/types": "^1.9.5",
+    "@tanstack/react-query": "^5.90.5",
+    "@types/node": "^24.9.1",
+    "@types/react": "^19.2.2",
+    "@typescript-eslint/eslint-plugin": "^8.46.2",
+    "@typescript-eslint/parser": "^8.46.2",
+    "eslint": "^9.38.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "happy-dom": "^20.0.8",
+    "prettier": "^3.6.2",
+    "react": "^19.2.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.4"
+  }
+}
