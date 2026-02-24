@@ -42,20 +42,41 @@ bun run test         # Run Vitest
 bun run lint         # Run ESLint
 bun run typecheck    # TypeScript check
 bun run format       # Format with Prettier
+bun run verify       # Run typecheck + lint + test + build
 ```
 
 ## Exports
 
 ### Business Logic
-- `initializeMixrLib(client: MixrClient)` - Initialize the library
+- `initializeMixrLib(client: MixrClient)` - Initialize the library with a client instance
+- `isMixrLibInitialized()` - Check if the library has been initialized
+- `getMixrClient()` - Get the stored MixrClient instance
 - `MIXR_LIB_VERSION` - Current version string
 
 ### Types (re-exported from mixr_types)
 All entity types, request/response types, and constants from `@sudobility/mixr_types`.
 
 ### Utilities
-- `formatMixrData(data)` - JSON pretty-printer
-- `validateMixrInput(input)` - Basic string validation
+- `formatMixrData(data)` - JSON pretty-printer (handles circular references)
+- `validateMixrInput(input)` - Basic non-empty string validation (trims whitespace)
+- `validateDisplayName(name)` - Display name length validation
+- `validateStarRating(stars)` - Star rating range validation (1-5, integer)
+- `validateReviewText(review)` - Review text length validation
+
+### Recipe Helpers
+- `formatIngredientList(ingredients)` - Format ingredients with amounts as readable strings
+- `formatRecipeSteps(steps)` - Number recipe steps (e.g., "1. Muddle mint...")
+- `formatRatingDisplay(aggregate)` - Format rating aggregate as display string
+- `getIngredientCount(recipe)` - Count ingredients in a recipe
+- `getStepCount(recipe)` - Count steps in a recipe
+- `getEquipmentNames(recipe)` - Extract unique equipment names from a recipe
+
+### Constants
+- `MIN_STAR_RATING`, `MAX_STAR_RATING` - Star rating range (1-5)
+- `MAX_REVIEW_LENGTH` - Maximum review text length (2000)
+- `MIN_DISPLAY_NAME_LENGTH`, `MAX_DISPLAY_NAME_LENGTH` - Display name constraints (3-50)
+- `DEFAULT_PAGE_LIMIT`, `MAX_PAGE_LIMIT` - Pagination defaults (20, 100)
+- `DEFAULT_RATING_SORT` - Default rating sort order ("newest")
 
 ### Hooks
 - `useMixrLibPlaceholder(initialValue)` - Example hook pattern

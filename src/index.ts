@@ -11,14 +11,20 @@
 // BUSINESS LOGIC EXPORTS
 // ============================================================================
 
-export { initializeMixrLib, MIXR_LIB_VERSION } from './business';
+export {
+  initializeMixrLib,
+  isMixrLibInitialized,
+  getMixrClient,
+  MIXR_LIB_VERSION,
+} from './business';
 
 // ============================================================================
 // TYPE EXPORTS
 // ============================================================================
 
-// Re-export all types from @sudobility/mixr_types
+// Re-export all types from @sudobility/mixr_types (grouped and documented in ./types)
 export type {
+  // Common types
   Optional,
   ApiResponse,
   BaseResponse,
@@ -26,9 +32,15 @@ export type {
   PaginatedResponse,
   PaginationInfo,
   PaginationOptions,
+
+  // Enum / subcategory types
   EquipmentSubcategory,
   IngredientSubcategory,
+
+  // API response wrapper
   MixrApiResponse,
+
+  // Entity types
   Equipment,
   Ingredient,
   Mood,
@@ -40,15 +52,21 @@ export type {
   RecipeWithUser,
   RecipeRating,
   RatingAggregate,
+
+  // Request types
   UpdateUserRequest,
   UpdateUserPreferencesRequest,
   AddFavoriteRequest,
   SubmitRatingRequest,
   GenerateRecipeRequest,
+
+  // Query param types
   EquipmentQueryParams,
   IngredientQueryParams,
   PaginationQueryParams,
   RatingListParams,
+
+  // Response types
   EquipmentListResponse,
   EquipmentResponse,
   EquipmentSubcategoriesResponse,
@@ -80,7 +98,34 @@ export type { NetworkResponse } from '@sudobility/types';
 // UTILITY EXPORTS
 // ============================================================================
 
-export { formatMixrData, validateMixrInput } from './utils';
+export {
+  // Formatting utilities
+  formatMixrData,
+  formatIngredientList,
+  formatRecipeSteps,
+  formatRatingDisplay,
+
+  // Validation utilities
+  validateMixrInput,
+  validateDisplayName,
+  validateStarRating,
+  validateReviewText,
+
+  // Recipe helpers
+  getIngredientCount,
+  getStepCount,
+  getEquipmentNames,
+
+  // Constants
+  MIN_STAR_RATING,
+  MAX_STAR_RATING,
+  MAX_REVIEW_LENGTH,
+  MIN_DISPLAY_NAME_LENGTH,
+  MAX_DISPLAY_NAME_LENGTH,
+  DEFAULT_PAGE_LIMIT,
+  MAX_PAGE_LIMIT,
+  DEFAULT_RATING_SORT,
+} from './utils';
 
 // ============================================================================
 // HOOKS EXPORTS
