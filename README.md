@@ -1,156 +1,86 @@
 # @sudobility/mixr_lib
 
-Shared utilities and business logic library for the MIXR cocktail application. This library provides common functionality, React hooks, and type-safe patterns for building MIXR-based applications.
+Business logic library for the MIXR cocktail platform with shared utilities, validation, and recipe helpers.
 
 ## Installation
 
 ```bash
-npm install @sudobility/mixr_lib
+bun add @sudobility/mixr_lib
 ```
 
-## Peer Dependencies
-
-This library requires the following peer dependencies:
-
-- `@sudobility/types` - Core type definitions
-- `@sudobility/di` - Dependency injection framework
-- `@sudobility/mixr_client` - MIXR API client
-- `@tanstack/react-query` - Data fetching and caching
-- `react` - React framework
+### Peer Dependencies
 
 ```bash
-npm install @sudobility/types @sudobility/di @sudobility/mixr_client @tanstack/react-query react
+bun add @sudobility/di @sudobility/mixr_types @tanstack/react-query react zustand
 ```
-
-## Features
-
-- **Business Logic**: Core business operations and workflows
-- **React Hooks**: Custom hooks for MIXR functionality integration
-- **Utilities**: Helper functions and common utilities
-- **Type Definitions**: Shared TypeScript types and interfaces
-- **Type Safety**: Built with strict TypeScript for maximum type safety
 
 ## Usage
 
 ```typescript
 import {
   initializeMixrLib,
+  getMixrClient,
   formatMixrData,
-  useMixrLibPlaceholder,
+  validateMixrInput,
   MIXR_LIB_VERSION,
 } from '@sudobility/mixr_lib';
 
-// Initialize the library
-const client = new MixrClient(/* ... */);
+import type { Equipment, Recipe, Mood } from '@sudobility/mixr_lib';
+
+// Initialize with a MixrClient instance
 initializeMixrLib(client);
-
-// Use utilities
-const formattedData = formatMixrData(data);
-
-// Use hooks in React components
-function MyComponent() {
-  const { value, setValue } = useMixrLibPlaceholder('initial');
-  // ...
-}
 ```
 
-## Project Structure
+## API
 
-```
-src/
-├── business/     # Core business logic and operations
-├── hooks/        # React hooks
-├── types/        # TypeScript type definitions
-├── utils/        # Utility functions
-├── test/         # Test setup and utilities
-└── index.ts      # Main entry point with barrel exports
-```
+### Business Logic
+
+- `initializeMixrLib(client)` -- initialize the library
+- `isMixrLibInitialized()` -- check initialization status
+- `getMixrClient()` -- get the stored MixrClient instance
+
+### Validation
+
+- `validateMixrInput(input)` -- non-empty string validation
+- `validateDisplayName(name)` -- display name length (3-50 chars)
+- `validateStarRating(stars)` -- integer range (1-5)
+- `validateReviewText(review)` -- review length (max 2000)
+
+### Recipe Helpers
+
+- `formatIngredientList(ingredients)` -- readable ingredient strings
+- `formatRecipeSteps(steps)` -- numbered step list
+- `formatRatingDisplay(aggregate)` -- rating display string
+- `getIngredientCount(recipe)`, `getStepCount(recipe)`, `getEquipmentNames(recipe)`
+
+### Constants
+
+- `MIN_STAR_RATING` / `MAX_STAR_RATING` -- 1-5
+- `MAX_REVIEW_LENGTH` -- 2000
+- `MIN_DISPLAY_NAME_LENGTH` / `MAX_DISPLAY_NAME_LENGTH` -- 3-50
+- `DEFAULT_PAGE_LIMIT` / `MAX_PAGE_LIMIT` -- 20/100
+
+### Types
+
+Re-exports all entity, request, and response types from `@sudobility/mixr_types`.
 
 ## Development
 
-### Build
-
 ```bash
-npm run build
+bun run build        # Build to dist/
+bun run build:watch  # Watch mode
+bun run test         # Run Vitest
+bun run typecheck    # TypeScript check
+bun run lint         # ESLint check
+bun run verify       # Typecheck + lint + test + build
 ```
 
-### Watch Mode
+## Related Packages
 
-```bash
-npm run dev
-```
-
-### Testing
-
-```bash
-# Run tests in watch mode
-npm test
-
-# Run tests once
-npm run test:run
-
-# Generate coverage report
-npm run test:coverage
-```
-
-### Linting and Formatting
-
-```bash
-# Run ESLint
-npm run lint
-
-# Fix ESLint issues
-npm run lint:fix
-
-# Format code with Prettier
-npm run format
-
-# Check formatting
-npm run format:check
-```
-
-### Type Checking
-
-```bash
-# Check types
-npm run typecheck
-
-# Check types in watch mode
-npm run typecheck:watch
-```
-
-### All Checks
-
-```bash
-# Run all checks (lint, typecheck, test)
-npm run check-all
-
-# Quick check (lint and typecheck only)
-npm run quick-check
-```
-
-## TypeScript Configuration
-
-This library uses strict TypeScript configuration with:
-
-- Strict null checks
-- No implicit any
-- Exact optional property types
-- No unchecked indexed access
-- And more strict options for maximum type safety
+- `@sudobility/mixr_types` -- type definitions
+- `@sudobility/mixr_client` -- API client and hooks
+- `mixr` -- frontend web app
 
 ## License
 
 MIT
-
-## Author
-
-John Huang
-
-## Repository
-
-https://github.com/johnqh/mixr_lib.git
-
-## Version
-
-0.0.1 (Initial development version with placeholder code)
