@@ -1,5 +1,10 @@
 # MIXR Lib
 
+> **Git policy — never auto-commit or auto-push.** Leave your work in the working tree.
+> Run `git commit`, `git push`, `gh pr create`, or `scripts/push_all.sh` **only when the user
+> explicitly asks in that turn**. Approval for an earlier change does not carry forward, and
+> finishing a task is not permission to commit it.
+
 Business logic library for MIXR with shared utilities, types, and hooks.
 
 **npm**: `@sudobility/mixr_lib` (restricted)
@@ -119,3 +124,7 @@ mixr (frontend)
 bun run prepublishOnly  # Clean + build
 npm publish             # Publish to npm
 ```
+
+## Git Workflow
+
+- Do not use feature branches for code changes. Always stay on the current branch.
